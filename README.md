@@ -21,11 +21,12 @@
 
 ```bash
 brew tap jimicat/lofi https://github.com/jimicat/lofi
+brew trust --formula jimicat/lofi/lofi
 brew install jimicat/lofi/lofi
 lofi
 ```
 
-Formula 会从固定版本的源码编译，并自动处理 Rust 构建依赖；Linux 上会同时安装 `alsa-lib`。使用 `brew install --HEAD jimicat/lofi/lofi` 可以安装 `main` 分支的最新代码。
+Homebrew 7 起需要先信任第三方 tap 中的 Formula。Formula 会从固定版本的源码编译，并自动处理 Rust 构建依赖；Linux 上会同时安装 `alsa-lib`。使用 `brew install --HEAD jimicat/lofi/lofi` 可以安装 `main` 分支的最新代码。
 
 ### 预编译产物
 

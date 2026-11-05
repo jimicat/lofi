@@ -13,9 +13,32 @@
 - **自适应布局**：从 56×18 的小窗口到宽屏都能正常显示，支持中文宽字符对齐
 - **不阻塞的交互**：换台、暂停、重连在缓冲或网络等待时也能立即响应
 
-## 快速开始
+## 安装
 
-需要 Rust 1.85+、可用的音频输出设备，以及网络连接。
+需要可用的音频输出设备、网络连接；从源码构建需要 Rust 1.85+。
+
+### Homebrew
+
+```bash
+brew tap jimicat/lofi https://github.com/jimicat/lofi
+brew install jimicat/lofi/lofi
+lofi
+```
+
+Formula 会从固定版本的源码编译，并自动处理 Rust 构建依赖；Linux 上会同时安装 `alsa-lib`。使用 `brew install --HEAD jimicat/lofi/lofi` 可以安装 `main` 分支的最新代码。
+
+### 预编译产物
+
+推送 `v*` 标签后，GitHub Actions 会自动构建 macOS（Apple Silicon / Intel）和 Linux x86_64 的压缩包，并生成 `SHA256SUMS`，随 GitHub Release 一起发布：
+
+```bash
+tar -xzf lofi-0.1.0-aarch64-apple-darwin.tar.gz
+./lofi-0.1.0-aarch64-apple-darwin/lofi
+```
+
+Linux 产物需要系统安装 ALSA 运行库（Debian/Ubuntu：`sudo apt install libasound2`）。
+
+### 从源码运行
 
 ```bash
 git clone https://github.com/jimicat/lofi.git
@@ -23,7 +46,7 @@ cd lofi
 cargo run --release
 ```
 
-也可以安装为本地命令：
+安装到 `~/.cargo/bin`：
 
 ```bash
 cargo install --path .
@@ -125,6 +148,15 @@ cargo test
 # 需要网络和音频设备
 cargo test -- --ignored
 ```
+
+## 发布
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+[release.yml](.github/workflows/release.yml) 会构建三个平台的产物、生成校验和并创建 GitHub Release。发布后需要同步更新 [Formula/lofi.rb](Formula/lofi.rb) 中的 `url`、`sha256` 和 `version`，让 Homebrew 安装新的版本。
 
 ## 说明与限制
 

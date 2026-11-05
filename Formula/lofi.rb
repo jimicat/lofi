@@ -1,9 +1,9 @@
 class Lofi < Formula
   desc "Terminal radio for lo-fi, ambient and sleep music"
   homepage "https://github.com/jimicat/lofi"
-  url "https://github.com/jimicat/lofi/archive/50b8560a74cb5d8cde4624746e170bd0028b9421.tar.gz"
+  url "https://github.com/jimicat/lofi/archive/refs/tags/v0.1.0.tar.gz"
   version "0.1.0"
-  sha256 "a3a387b6835bac20bc040029eb0804f6c29cc2c510012a37e0143c2fd9d2a3bc"
+  sha256 "ea6b423f154a8a0907100d205aedbc525a816799e83d546324a23be728da3b04"
   head "https://github.com/jimicat/lofi.git", branch: "main"
 
   depends_on "rust" => :build

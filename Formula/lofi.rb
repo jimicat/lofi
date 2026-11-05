@@ -1,7 +1,9 @@
 class Lofi < Formula
   desc "Terminal radio for lo-fi, ambient and sleep music"
   homepage "https://github.com/jimicat/lofi"
+  url "https://github.com/jimicat/lofi/releases/download/v0.1.0/lofi-0.1.0-x86_64-unknown-linux-gnu.tar.gz"
   version "0.1.0"
+  sha256 "ffbd7acf31d68782f396296e0e1cff3c35da68c1a7c942ac7f60723aceaef2d3"
 
   on_macos do
     on_arm do
@@ -16,16 +18,8 @@ class Lofi < Formula
   end
 
   on_linux do
-    on_intel do
-      url "https://github.com/jimicat/lofi/releases/download/v0.1.0/lofi-0.1.0-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "ffbd7acf31d68782f396296e0e1cff3c35da68c1a7c942ac7f60723aceaef2d3"
-    end
-
-    on_arm do
-      odie "lofi does not provide Linux arm64 binaries yet"
-    end
-
     depends_on "alsa-lib"
+    depends_on arch: :x86_64
   end
 
   def install

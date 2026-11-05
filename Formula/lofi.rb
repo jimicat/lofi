@@ -23,7 +23,7 @@ class Lofi < Formula
   end
 
   def install
-    bin.install Dir["lofi-*/lofi"].first
+    bin.install "lofi"
   end
 
   test do

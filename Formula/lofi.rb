@@ -1,20 +1,35 @@
 class Lofi < Formula
   desc "Terminal radio for lo-fi, ambient and sleep music"
   homepage "https://github.com/jimicat/lofi"
-  url "https://github.com/jimicat/lofi/archive/refs/tags/v0.1.0.tar.gz"
   version "0.1.0"
-  sha256 "ea6b423f154a8a0907100d205aedbc525a816799e83d546324a23be728da3b04"
-  head "https://github.com/jimicat/lofi.git", branch: "main"
 
-  depends_on "rust" => :build
+  on_macos do
+    on_arm do
+      url "https://github.com/jimicat/lofi/releases/download/v0.1.0/lofi-0.1.0-aarch64-apple-darwin.tar.gz"
+      sha256 "8541e99e0b1971dee5500a5a434acda3e6c3e2504db1a782ff53cb893d330b8d"
+    end
+
+    on_intel do
+      url "https://github.com/jimicat/lofi/releases/download/v0.1.0/lofi-0.1.0-x86_64-apple-darwin.tar.gz"
+      sha256 "d0ba498fc6380e3b75483fd68b37d805888efefca1dfea26c767d9a7e8d2aef5"
+    end
+  end
 
   on_linux do
-    depends_on "pkgconf" => :build
+    on_intel do
+      url "https://github.com/jimicat/lofi/releases/download/v0.1.0/lofi-0.1.0-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "ffbd7acf31d68782f396296e0e1cff3c35da68c1a7c942ac7f60723aceaef2d3"
+    end
+
+    on_arm do
+      odie "lofi does not provide Linux arm64 binaries yet"
+    end
+
     depends_on "alsa-lib"
   end
 
   def install
-    system "cargo", "install", *std_cargo_args
+    bin.install Dir["lofi-*/lofi"].first
   end
 
   test do

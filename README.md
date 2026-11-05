@@ -26,7 +26,7 @@ brew install jimicat/lofi/lofi
 lofi
 ```
 
-Homebrew 7 起需要先信任第三方 tap 中的 Formula。Formula 会从固定版本的源码编译，并自动处理 Rust 构建依赖；Linux 上会同时安装 `alsa-lib`。使用 `brew install --HEAD jimicat/lofi/lofi` 可以安装 `main` 分支的最新代码。
+Homebrew 7 起需要先信任第三方 tap 中的 Formula。Formula 直接下载对应平台的预编译二进制（macOS Apple Silicon / Intel、Linux x86_64），无需本地 Rust 工具链；Linux 上会自动安装 `alsa-lib` 运行库。目前暂不提供 Linux arm64 产物，需要时请参考下文从源码构建。
 
 ### 预编译产物
 
@@ -157,7 +157,7 @@ git tag v0.1.0
 git push origin v0.1.0
 ```
 
-[release.yml](.github/workflows/release.yml) 会构建三个平台的产物、生成校验和并创建 GitHub Release。发布后需要同步更新 [Formula/lofi.rb](Formula/lofi.rb) 中的 `url`、`sha256` 和 `version`，让 Homebrew 安装新的版本。
+[release.yml](.github/workflows/release.yml) 会构建三个平台的产物、生成校验和并创建 GitHub Release。发布后需要同步更新 [Formula/lofi.rb](Formula/lofi.rb) 中三个平台的 `url`、`sha256` 以及 `version`，让 Homebrew 安装新的版本。
 
 ## 说明与限制
 
